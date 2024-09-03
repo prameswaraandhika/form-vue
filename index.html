@@ -1,68 +1,62 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <title>Band Members</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Band Members</title>
+</head>
 
-    <body>
-        
-        <main id="app">
-            
-            
-
-            <h1>
-                Band Members
-            </h1>
-
-            <table>
-                <thead>
+<body>
+    <main id="app">
+        <h1>Band Members</h1>
+        <table>
+            <thead>
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Instrument</th>
+                    <th>Status</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr v-for="member in members">
-                    <td>{{member.fname}}</td>
-                    <td>{{member.lname}}</td>
+            </thead>
+            <tbody>
+                <tr v-for="member in members" :key="member.id">
+                    <td>{{member.firstName}}</td>
+                    <td>{{member.lastName}}</td>
                     <td>{{member.instrument}}</td>
+                    <td>{{member.active ? 'Active Cuy' : 'Inactive Cuy'}}</td>
                 </tr>
-                </tbody>
-            </table>
+            </tbody>
+        </table>
+        <section class="add-more">
+            <p>Add More Band Members</p>
+            <form>
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" name="fname" v-model="newMember.firstName">
 
-            <section class="add-more">
-                <p>Add more band members</p>
-                <form>
-                
-                <label for="fname">First name:</label><br>
-                <input type="text" id="fname" name="fname"><br>
-                
-                <label for="lname">Last name:</label><br>
-                <input type="text" id="lname" name="lname"><br>
+                <label for="lname">Last Name:</label>
+                <input type="text" id="lname" name="lname" v-model="newMember.lastName">
 
-                <label for="instrument">Instrument:</label><br>
-                <select name="instrument" id="instrument">
+                <input type="checkbox" id="checkbox" v-model="newMember.active">
+                <label for="checkbox">Is Active</label>
+
+                <label for="instrument">Instrument:</label>
+                <select name="instrument" id="instrument" v-model="newMember.instrument">
                     <option value="Bass">Bass</option>
                     <option value="Electric Guitar">Electric Guitar</option>
                     <option value="Acoustic Guitar">Acoustic Guitar</option>
                     <option value="Drums">Drums</option>
-                    </select>
-                    <br><br>
-                <input type="button" value="Add">
-                </form> 
-            </section>
+                </select>
 
-        </main>
-        <script src="https://unpkg.com/vue@next"></script>
-        <script src="scripts.js"></script>
-    </body>
+                <input type="button" value="Add" @click="createMember">
+            </form>
+        </section>
+    </main>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="scripts.js"></script>
+</body>
 
 </html>
